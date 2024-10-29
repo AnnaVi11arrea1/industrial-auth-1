@@ -3,12 +3,6 @@ class PhotosController < ApplicationController
   before_action :ensure_current_user_is_owner, only: [:edit, :update, :destroy]
 
 
-  def ensure_current_user_is_owner
-    if current_user != @photo.owner
-      redirect_back(fallback_location: root_url, alert: "You are not authorized for this action.") 
-    end
-  end
-
   # GET /photos or /photos.json
   def index
     @photos = Photo.all
@@ -75,4 +69,10 @@ class PhotosController < ApplicationController
     def photo_params
       params.require(:photo).permit(:image, :comments_count, :likes_count, :caption, :owner_id)
     end
+
+  def ensure_current_user_is_owner
+    if current_user != @photo.owner
+      redirect_back(fallback_location: root_url, alert: "You are not authorized for this action.") 
+    end
+  end
 end
