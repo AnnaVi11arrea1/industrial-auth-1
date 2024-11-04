@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+  after_action :verify_authorized, unless: :devise_controller?
+  after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
   before_action :set_user, only: %i[ show liked feed followers following discover ]
+  
 
   private
 

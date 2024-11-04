@@ -1,4 +1,5 @@
-class PhotoPolicy
+class PhotoPolicy < ApplicationPolicy
+  
   attr_reader :user, :photo
 
   def initialize(user, photo)
@@ -15,5 +16,3 @@ end
     photo.owner.followers.include?(user)
   end
 end
-
-
