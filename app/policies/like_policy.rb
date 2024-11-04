@@ -1,4 +1,4 @@
-class LikePolicy
+class LikePolicy < ApplicationPolicy
   attr_reader :current_user, :user
   
   def index?

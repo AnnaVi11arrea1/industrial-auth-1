@@ -1,4 +1,4 @@
-class FollowRequestPolicy
+class FollowRequestPolicy < ApplicationPolicy
   attr_reader :current_user, :user
   
   def index?

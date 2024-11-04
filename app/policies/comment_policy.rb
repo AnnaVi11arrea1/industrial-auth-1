@@ -1,4 +1,4 @@
-class CommentPolicy
+class CommentPolicy < ApplicationPolicy
   attr_reader :current_user, :user
   
   def index?
