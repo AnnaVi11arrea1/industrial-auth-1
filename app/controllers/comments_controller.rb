@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
   before_action :is_an_authorized_user, only: [:destroy, :create]
   before_action :ensure_current_user_is_owner, only: [:edit, :update, :destroy]
-  before_action :ensure_user_is_authorized, only: [:show]
+  before_action :ensure_user_is_authorized, only: [:show, :new, :create, :update, :destroy]
 
   # GET /comments or /comments.json
   def index
@@ -84,5 +84,5 @@ class CommentsController < ApplicationController
         redirect_back(fallback_location: root_url, alert: "You can't modify that.")
       end
     end
-    
+
 end

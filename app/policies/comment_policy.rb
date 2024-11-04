@@ -37,4 +37,8 @@ class CommentPolicy
   def show?
     user == current_user || !user.private? || user.followers.include?(current_user)
   end
+
+  def authorized?
+   User.where(user.id => comment.author_id)
+  end
 end
