@@ -20,6 +20,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    authorize @comment
   end
 
   # POST /comments or /comments.json
@@ -77,4 +78,11 @@ class CommentsController < ApplicationController
         redirect_back(fallback_location: root_url, alert: "You are not authorized for this action.")
       end
     end
+
+    def ensure_current_user_is_owner
+      unless current_user == @comment.author
+        redirect_back(fallback_location: root_url, alert: "You can't modify that.")
+      end
+    end
+    
 end
