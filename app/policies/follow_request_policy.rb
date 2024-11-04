@@ -1,4 +1,4 @@
-class UserPolicy
+class FollowRequestPolicy
   attr_reader :current_user, :user
   
   def index?
@@ -9,25 +9,22 @@ class UserPolicy
     true
   end
 
-  def liked?
+  def new?
     true
   end
 
-  def feed?
+  def edit?
     true
   end
 
-  def followers?
+  def create?
     true
   end
 
-  def following?
+  def destroy?
     true
   end
 
-  def discover?
-    true
-  end
 
   def initialize(current_user, user)
     @current_user = current_user

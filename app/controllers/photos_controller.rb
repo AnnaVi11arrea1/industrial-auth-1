@@ -80,7 +80,7 @@ class PhotosController < ApplicationController
 
   def ensure_user_is_authorized
     if !PhotoPolicy.new(current_user, @photo).show?
-      raise Punditt::NotAuthorizedError, "not allowed"
+      raise Pundit::NotAuthorizedError, "not allowed"
     end
   end
 end
