@@ -1,9 +1,8 @@
 class PhotoPolicy < ApplicationPolicy
-  
-  attr_reader :current_user, :photo
-
-  def initialize(owner, photo)
-    owner = Photo.where(:owner => current_user)
+  attr_reader :user, :photo
+  def initialize(user, photo)
+    @user = user
+    @photo = photo
   end
 
 # Pur policy is that a photo should only be seen by the owner or followers of the owner, unless the owner is not provate in which case anyone can see it.
@@ -13,9 +12,9 @@ class PhotoPolicy < ApplicationPolicy
   end
 
   def show?
-    current_user == photo.owner ||
+    user == photo.owner ||
     !photo.owner.private? ||
-    photo.owner.followers.include?(current_user)
+    photo.owner.followers.include?(user)
   end
 
   def create?
@@ -23,11 +22,11 @@ class PhotoPolicy < ApplicationPolicy
   end
 
   def update?
-    current_user == photo.owner
+    user == photo.owner
   end
 
   def destroy?
-    current_user == photo.owner
+    user == photo.owner
   end
 
 end
