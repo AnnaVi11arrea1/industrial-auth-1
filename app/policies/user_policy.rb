@@ -21,9 +21,9 @@ class UserPolicy < ApplicationPolicy
   end
 
   def feed?
-    # user.leaders.include?(current_user)
-    # user.followers.include?(current_user)
+    current_user == user
   end
+
 
   def discover?
     true
