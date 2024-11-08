@@ -16,10 +16,6 @@ class UserPolicy < ApplicationPolicy
     user.followers.include?(current_user)
   end
 
-  def liked?
-    true
-  end
-
   def feed?
     # user.leaders.include?(current_user)
     # user.followers.include?(current_user)
