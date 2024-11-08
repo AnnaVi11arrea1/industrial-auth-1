@@ -3,27 +3,21 @@ class UsersController < ApplicationController
   before_action :authorize_user
 
   def show
-    authorize @user
   end
 
   def liked
-    authorize @user
   end
 
   def feed
-    authorize @user
   end
 
   def followers
-    authorize @user
   end
 
   def following
-    authorize @user
   end
 
   def discover
-    authorize @user
   end
 
   private

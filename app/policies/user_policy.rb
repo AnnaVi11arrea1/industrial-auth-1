@@ -17,11 +17,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def feed?
-    # user.leaders.include?(current_user)
-    # user.followers.include?(current_user)
+   user == current_user
   end
 
   def discover?
-    true
+    user == current_user
   end
 end
