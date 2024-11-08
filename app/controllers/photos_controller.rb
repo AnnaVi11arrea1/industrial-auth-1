@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: %i[ show edit update destroy ]
-  before_action :authorize_photo, except:[:new, :create]
+  before_action :authorize_photo, except: [:new, :create]
   after_action :authorize_photo, only: [:new, :create]
 
 

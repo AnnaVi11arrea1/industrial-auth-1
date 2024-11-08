@@ -10,6 +10,12 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def liked?
+    user == current_user ||
+    !user.private? || 
+    user.followers.include?(current_user)
+  end
+
   def show_photos?
     user == current_user ||
     !user.private? || 
