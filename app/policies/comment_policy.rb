@@ -19,7 +19,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def edit?
-    user == copmment.author
+    user == comment.author
   end
 
   def create?
