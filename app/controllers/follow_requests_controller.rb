@@ -1,7 +1,7 @@
 class FollowRequestsController < ApplicationController
   before_action :set_follow_request, only: %i[ show edit update destroy ]
-  before_action :ensure_current_user_is_owner, only: [:new, :create]
-  before_action :ensure_user_is_authorized, only: [:show]
+  before_action :authorize_follow_request, except: [:new, :create]
+  after_action :authorize_follow_request, only: [:new, :create]
 
   # GET /follow_requests or /follow_requests.json
   def index
