@@ -9,7 +9,7 @@ class PhotoPolicy < ApplicationPolicy
 # Pur policy is that a photo should only be seen by the owner or followers of the owner, unless the owner is not provate in which case anyone can see it.
 
   def index?
-    true
+    false
   end
 
   def show?
