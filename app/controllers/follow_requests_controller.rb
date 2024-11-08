@@ -1,6 +1,6 @@
 class FollowRequestsController < ApplicationController
   before_action :set_follow_request, only: %i[ show edit update destroy ]
-  before_action :ensure_current_user_is_owner, only: [:edit, :update, :destroy]
+  before_action :ensure_current_user_is_owner, only: [:new, :create]
   before_action :ensure_user_is_authorized, only: [:show]
 
   # GET /follow_requests or /follow_requests.json
@@ -70,5 +70,7 @@ class FollowRequestsController < ApplicationController
       params.require(:follow_request).permit(:recipient_id, :sender_id, :status)
     end
 
-
+    def authorize_follow_request
+      authorize @follow_request
+    end
 end
