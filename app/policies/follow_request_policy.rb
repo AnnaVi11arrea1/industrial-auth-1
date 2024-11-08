@@ -1,37 +1,37 @@
 class FollowRequestPolicy < ApplicationPolicy
-  attr_reader :current_user, :user
+  attr_reader :follow_request, :user
+  
+  def initialize(follow_request, user)
+    @follow_request = follow_request
+    @user = user
+  end
   
   def index?
-    true
+    false
   end
 
   def show?
-    true
+    false
   end
 
   def new?
-    true
+    !follow_request.recipient.followers.include?(@user)
   end
 
   def edit?
-    true
+    user == follow_request.recipient
   end
 
   def create?
-    true
+    !follow_request.recipient.followers.include?(@user)
+  end
+
+  def update?
+    user == follow_request.recipient
   end
 
   def destroy?
-    true
-  end
-
-
-  def initialize(current_user, user)
-    @current_user = current_user
-    @user = user
-  end
-
-  def show?
-    user == current_user || !user.private? || user.followers.include?(current_user)
+    user == follow_request.recipient ||
+      user == follow_request.sender
   end
 end
