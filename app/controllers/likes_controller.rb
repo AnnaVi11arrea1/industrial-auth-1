@@ -1,6 +1,5 @@
 class LikesController < ApplicationController
   before_action :set_like, only: %i[ destroy ]
-
   before_action :is_an_authorized_user, only: [:destroy, :create]
 
   def is_an_authorized_user
