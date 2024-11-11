@@ -20,7 +20,7 @@
 #  fk_rails_...  (owner_id => users.id)
 #
 class Photo < ApplicationRecord
-  belongs_to :owner, class_name: "User", counter_cache: true
+  belongs_to :owner, class_name: "User", counter_cache: true, foreign_key: "owner_id"
 
   has_many :comments, dependent: :destroy
 

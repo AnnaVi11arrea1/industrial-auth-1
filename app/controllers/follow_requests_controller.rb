@@ -1,5 +1,7 @@
 class FollowRequestsController < ApplicationController
   before_action :set_follow_request, only: %i[ show edit update destroy ]
+  before_action :authorize_follow_request, except: [:new, :create]
+  after_action :authorize_follow_request, only: [:new, :create]
 
   # GET /follow_requests or /follow_requests.json
   def index
@@ -66,5 +68,9 @@ class FollowRequestsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def follow_request_params
       params.require(:follow_request).permit(:recipient_id, :sender_id, :status)
+    end
+
+    def authorize_follow_request
+      authorize @follow_request
     end
 end

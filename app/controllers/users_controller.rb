@@ -1,5 +1,24 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show liked feed followers following discover ]
+  before_action :authorize_user
+
+  def show
+  end
+
+  def liked
+  end
+
+  def feed
+  end
+
+  def followers
+  end
+
+  def following
+  end
+
+  def discover
+  end
 
   private
 
@@ -9,5 +28,9 @@ class UsersController < ApplicationController
       else
         @user = current_user
       end
+    end
+
+    def authorize_user
+      authorize @user
     end
 end

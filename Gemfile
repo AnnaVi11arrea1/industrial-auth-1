@@ -86,6 +86,7 @@ gem "sqlite3", "~> 1.4"
 gem "table_print"
 gem "simple_form"
 gem "carrierwave"
+gem "pundit"
 
 group :development do
   gem "annotate"
