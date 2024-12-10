@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :is_an_authorized_user, only: [:destroy, :edit, :create]
+  before_action :is_comment_author, only: [:edit, :update]
 
   # GET /comments or /comments.json
   def index
@@ -8,6 +10,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1 or /comments/1.json
   def show
+    
   end
 
   # GET /comments/new
@@ -17,6 +20,9 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @comment = Comment.find(id: params[:id]).first
+    
+
   end
 
   # POST /comments or /comments.json
@@ -66,5 +72,19 @@ class CommentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def comment_params
       params.require(:comment).permit(:author_id, :photo_id, :body)
+    end
+
+    def is_an_authorized_user
+      @photo = Photo.find(params.fetch(:comment).fetch(:photo_id))
+      if current_user != @photo.owner && @photo.owner.private? && !current_user.leaders.include?(@photo.owner)
+        redirect_back fallback_location: root_url, alert: "Not authorized"
+      
+      end
+    end
+
+    def is_comment_author
+      unless @comment.author == current_user
+        redirect_back fallback_location: root_url, alert: "You are not authorized to edit this comment."
+      end
     end
 end
